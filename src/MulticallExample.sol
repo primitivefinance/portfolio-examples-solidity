@@ -33,4 +33,38 @@ contract MulticallExample {
         // Finally, let's call the multicall function.
         portfolio.multicall(data);
     }
+
+    /**
+     * @notice Creates a pair and a pool and allocates in a single transaction
+     * by calling the `multicall` function.
+     * @param asset Address of the asset token.
+     * @param quote Address of the quote token.
+     */
+    function createPairAndPoolAndAllocate(
+        address asset,
+        address quote
+    ) external {
+        // Let's prepare the data for our multicall.
+        bytes[] memory data = new bytes[](3);
+
+        // First, let's create the pair.
+        data[0] = abi.encodeCall(IPortfolioActions.createPair, (asset, quote));
+
+        // Second, let's create the pool. Note that we are using the pairId 0,
+        // this is a "magic value" referring to the last pair created.
+        data[1] = abi.encodeCall(
+            IPortfolioActions.createPool,
+            (0, address(this), 10, 100, 10_000, 365, 1 ether, 1 ether)
+        );
+
+        // Third, let's allocate into the pool. Note that we are using poolId 0,
+        // this is a "magic value" referring to the last pool created.
+        data[2] = abi.encodeCall(
+            IPortfolioActions.allocate,
+            (false, 0, 1 ether, type(uint128).max, type(uint128).max)
+        );
+
+        // Finally, let's call the multicall function.
+        portfolio.multicall(data);
+    }
 }
