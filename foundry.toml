@@ -2,13 +2,13 @@
 libs = ["lib"]
 out = "out"
 remappings = [
-  'portfolio/=lib/portfolio/contracts/',
+  "portfolio/=lib/portfolio/contracts/",
 ]
 src = "src"
 
 [fmt]
-int_types = 'long'
+int_types = "long"
 line_length = 80
-multiline_func_header = 'params_first'
-quote_style = 'double'
+multiline_func_header = "params_first"
+quote_style = "double"
 tab_width = 4
