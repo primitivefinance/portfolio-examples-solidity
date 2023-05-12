@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-only
 pragma solidity ^0.8.4;
 
+import "forge-std/Test.sol";
+
 import "portfolio/RMM01Portfolio.sol";
 import "portfolio/test/SimpleRegistry.sol";
 import "solmate/tokens/WETH.sol";
@@ -12,9 +14,13 @@ contract TestERC20 is ERC20 {
         string memory symbol_,
         uint8 decimals_
     ) ERC20(name_, symbol_, decimals_) {}
+
+    function mint(address to, uint256 amount) external {
+        _mint(to, amount);
+    }
 }
 
-contract Setup {
+contract Setup is Test {
     WETH public weth;
     RMM01Portfolio public portfolio;
     SimpleRegistry public registry;
