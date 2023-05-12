@@ -16,8 +16,8 @@ contract SwapExample {
     }
 
     function swap() external {
-        // Assuming we want to swap from a  pool with a poolId of `2`.
-        uint64 poolId = 2;
+        // Assuming we want to allocate into the pool `1099511627777`:
+        uint64 poolId = 1099511627777;
 
         // Let's fetch our asset balance and use it for the swap.
         uint256 input = IERC20(asset).balanceOf(address(this));
