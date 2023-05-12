@@ -16,8 +16,8 @@ contract AllocateExample {
     }
 
     function allocate() external {
-        // Assuming we want to allocate into a pool with a poolId of `2`.
-        uint64 poolId = 2;
+        // Assuming we want to allocate into the pool `1099511627777`:
+        uint64 poolId = 1099511627777;
 
         // Let's check how many tokens we have.
         uint256 assetBalance = IERC20(asset).balanceOf(address(this));
