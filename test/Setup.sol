@@ -21,7 +21,7 @@ contract Setup {
     TestERC20 public asset;
     TestERC20 public quote;
 
-    function setUp() internal {
+    function _setUp() internal {
         weth = new WETH();
         registry = new SimpleRegistry();
         portfolio = new RMM01Portfolio(address(weth), address(registry));
