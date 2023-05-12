@@ -5,12 +5,16 @@ import "portfolio/interfaces/IPortfolio.sol";
 
 contract MulticallExample {
     IPortfolio public portfolio;
+    address public asset;
+    address public quote;
 
-    constructor(address portfolio_) {
+    constructor(address portfolio_, address asset_, address quote_) {
         portfolio = IPortfolio(portfolio_);
+        asset = asset_;
+        quote = quote_;
     }
 
-    function createPairAndPool(address asset, address quote) external {
+    function createPairAndPool() external {
         // In this example, we are going to create a new pair and a new pool in
         // one unique transaction.
 
@@ -31,10 +35,7 @@ contract MulticallExample {
         portfolio.multicall(data);
     }
 
-    function createPairAndPoolAndAllocate(
-        address asset,
-        address quote
-    ) external {
+    function createPairAndPoolAndAllocate() external {
         // In this example, we are going to create a new pair, a new pool and
         // allocate liquidity in the same transaction.
 

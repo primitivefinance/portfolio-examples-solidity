@@ -5,12 +5,16 @@ import "portfolio/interfaces/IPortfolio.sol";
 
 contract CreatePoolExample {
     IPortfolio public portfolio;
+    address public asset;
+    address public quote;
 
-    constructor(address portfolio_) {
+    constructor(address portfolio_, address asset_, address quote_) {
         portfolio = IPortfolio(portfolio_);
+        asset = asset_;
+        quote = quote_;
     }
 
-    function createPool(address asset, address quote) external {
+    function createPool() external {
         // Creating a new pool is quite simple, first we need to get the pairId
         // for our asset / quote pair. We can use the function `getPairId`.
         // Note that If the `pairId` is 0, this means that we need to create

@@ -5,12 +5,16 @@ import "portfolio/interfaces/IPortfolio.sol";
 
 contract CreatePairExample {
     IPortfolio public portfolio;
+    address public asset;
+    address public quote;
 
-    constructor(address portfolio_) {
+    constructor(address portfolio_, address asset_, address quote_) {
         portfolio = IPortfolio(portfolio_);
+        asset = asset_;
+        quote = quote_;
     }
 
-    function createPair(address asset, address quote) external {
+    function createPair() external {
         // Creating a new pair is extremely simple and only requires to pass the
         // address of two different tokens. Keep in mind that the decimals must
         // be between 6 and 18.

@@ -4,27 +4,28 @@ pragma solidity ^0.8.13;
 import "portfolio/interfaces/IPortfolio.sol";
 import "portfolio/interfaces/IERC20.sol";
 
-address constant USDC = 0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48;
-address constant USDT = 0xdAC17F958D2ee523a2206206994597C13D831ec7;
-
 contract SwapExample {
     IPortfolio public portfolio;
+    address public asset;
+    address public quote;
 
-    constructor(address portfolio_) {
+    constructor(address portfolio_, address asset_, address quote_) {
         portfolio = IPortfolio(portfolio_);
+        asset = asset_;
+        quote = quote_;
     }
 
     function swap() external {
-        // Assuming we want to swap into a USDC-USDT pool, with 2 as a poolId.
+        // Assuming we want to swap from a  pool with a poolId of `2`.
         uint64 poolId = 2;
 
-        // Let's fetch our USDC balance and use it for the swap.
-        uint256 input = IERC20(USDC).balanceOf(address(this));
+        // Let's fetch our asset balance and use it for the swap.
+        uint256 input = IERC20(asset).balanceOf(address(this));
 
-        // We approve the Portfolio contract to move our USDC tokens
-        IERC20(USDC).approve(address(portfolio), input);
+        // We approve the Portfolio contract to move our asset tokens
+        IERC20(asset).approve(address(portfolio), input);
 
-        // Now we check how much USDT we can get for our USDC.
+        // Now we check how much quote tokens we can get for our input.
         uint256 output =
             portfolio.getAmountOut(poolId, true, input, 0, address(this));
 
