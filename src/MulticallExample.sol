@@ -10,13 +10,10 @@ contract MulticallExample {
         portfolio = IPortfolio(portfolio_);
     }
 
-    /**
-     * @notice Creates a pair and a pool in a single transaction by calling the
-     * `multicall` function.
-     * @param asset Address of the asset token.
-     * @param quote Address of the quote token.
-     */
     function createPairAndPool(address asset, address quote) external {
+        // In this example, we are going to create a new pair and a new pool in
+        // one unique transaction.
+
         // Let's prepare the data for our multicall.
         bytes[] memory data = new bytes[](2);
 
@@ -34,16 +31,13 @@ contract MulticallExample {
         portfolio.multicall(data);
     }
 
-    /**
-     * @notice Creates a pair and a pool and allocates in a single transaction
-     * by calling the `multicall` function.
-     * @param asset Address of the asset token.
-     * @param quote Address of the quote token.
-     */
     function createPairAndPoolAndAllocate(
         address asset,
         address quote
     ) external {
+        // In this example, we are going to create a new pair, a new pool and
+        // allocate liquidity in the same transaction.
+
         // Let's prepare the data for our multicall.
         bytes[] memory data = new bytes[](3);
 
