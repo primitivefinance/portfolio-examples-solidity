@@ -37,7 +37,9 @@ contract DeallocateExample {
         IERC20(quote).approve(address(portfolio), deltaQuote);
 
         // Finally, we call the `allocate` function.
-        portfolio.allocate(false, poolId, maxLiquidity, deltaAsset, deltaQuote);
+        portfolio.allocate(
+            false, address(this), poolId, maxLiquidity, deltaAsset, deltaQuote
+        );
 
         // Since we were the first liquidity provider, a part of our liquidity
         // was burnt, we need to remove that from our calculations:

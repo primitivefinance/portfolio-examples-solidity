@@ -44,7 +44,9 @@ contract SwapExampleTest is Setup {
         asset.approve(address(portfolio), deltaAsset);
         quote.approve(address(portfolio), deltaQuote);
 
-        portfolio.allocate(false, poolId, maxLiquidity, deltaAsset, deltaQuote);
+        portfolio.allocate(
+            false, address(this), poolId, maxLiquidity, deltaAsset, deltaQuote
+        );
 
         example.swap();
     }

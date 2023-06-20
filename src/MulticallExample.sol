@@ -56,7 +56,14 @@ contract MulticallExample {
         // this is a "magic value" referring to the last pool created.
         data[2] = abi.encodeCall(
             IPortfolioActions.allocate,
-            (false, 0, 1 ether, type(uint128).max, type(uint128).max)
+            (
+                false,
+                address(this),
+                0,
+                1 ether,
+                type(uint128).max,
+                type(uint128).max
+            )
         );
 
         // Finally, let's call the multicall function.

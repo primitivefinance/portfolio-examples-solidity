@@ -72,12 +72,12 @@ contract UniV3Migrator {
         address asset,
         address quote
     ) external {
-        // First let's transfer the position NFT into this contract.
+        // First let's transfer the position NFT into this contract
         nonfungiblePositionManager.transferFrom(
             msg.sender, address(this), tokenId
         );
 
-        // Then we remove the liquidity from the Uniswap V3 pool.
+        // Then we remove the liquidity from the Uniswap V3 pool
         DecreaseLiquidityParams memory params = DecreaseLiquidityParams({
             tokenId: tokenId,
             liquidity: liquidity,
@@ -88,9 +88,18 @@ contract UniV3Migrator {
         (uint256 amount0, uint256 amount1) =
             nonfungiblePositionManager.decreaseLiquidity(params);
 
-        // Now we add the liquidity to the Portfolio pool.
+        // We approve the Portfolio to spend the tokens
+        IERC20(asset).approve(address(portfolio), type(uint256).max);
+        IERC20(quote).approve(address(portfolio), type(uint256).max);
+
+        // Now we add the liquidity to the Portfolio pool
         (uint256 deltaAsset, uint256 deltaQuote) = portfolio.allocate(
-            false, poolId, deltaLiquidity, maxDeltaAsset, maxDeltaQuote
+            false,
+            msg.sender,
+            poolId,
+            deltaLiquidity,
+            maxDeltaAsset,
+            maxDeltaQuote
         );
     }
 }

@@ -37,6 +37,8 @@ contract AllocateExample {
         IERC20(quote).approve(address(portfolio), deltaQuote);
 
         // Finally, we call the `allocate` function.
-        portfolio.allocate(false, poolId, maxLiquidity, deltaAsset, deltaQuote);
+        portfolio.allocate(
+            false, address(this), poolId, maxLiquidity, deltaAsset, deltaQuote
+        );
     }
 }
