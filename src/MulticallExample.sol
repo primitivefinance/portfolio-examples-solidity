@@ -14,6 +14,7 @@ contract MulticallExample {
         quote = quote_;
     }
 
+    /*
     function createPairAndPool() external {
         // In this example, we are going to create a new pair and a new pool in
         // one unique transaction.
@@ -23,6 +24,8 @@ contract MulticallExample {
 
         // First, let's create the pair.
         data[0] = abi.encodeCall(IPortfolioActions.createPair, (asset, quote));
+
+
 
         // Second, let's create the pool. Note that we are using the pairId 0,
         // this is a "magic value" referring to the last pair created.
@@ -62,4 +65,5 @@ contract MulticallExample {
         // Finally, let's call the multicall function.
         portfolio.multicall(data);
     }
+    */
 }

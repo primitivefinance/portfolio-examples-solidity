@@ -3,8 +3,9 @@ pragma solidity ^0.8.13;
 
 import "portfolio/interfaces/IPortfolio.sol";
 import "portfolio/interfaces/IERC20.sol";
+import "solmate/tokens/ERC1155.sol";
 
-contract DeallocateExample {
+contract DeallocateExample is ERC1155TokenReceiver {
     IPortfolio public portfolio;
     address public asset;
     address public quote;
@@ -16,8 +17,8 @@ contract DeallocateExample {
     }
 
     function deallocate() external {
-        // Assuming we want to allocate into the pool `1099511627777`:
-        uint64 poolId = 1099511627777;
+        // Assuming we want to allocate into the pool `4294967297`:
+        uint64 poolId = 4294967297;
 
         // Let's check how many tokens we have.
         uint256 assetBalance = IERC20(asset).balanceOf(address(this));
@@ -37,7 +38,9 @@ contract DeallocateExample {
         IERC20(quote).approve(address(portfolio), deltaQuote);
 
         // Finally, we call the `allocate` function.
-        portfolio.allocate(false, poolId, maxLiquidity, deltaAsset, deltaQuote);
+        portfolio.allocate(
+            false, address(this), poolId, maxLiquidity, deltaAsset, deltaQuote
+        );
 
         // Since we were the first liquidity provider, a part of our liquidity
         // was burnt, we need to remove that from our calculations:

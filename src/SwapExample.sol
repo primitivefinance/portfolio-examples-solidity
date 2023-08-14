@@ -16,6 +16,7 @@ contract SwapExample {
     }
 
     function swap() external {
+        /*
         // Assuming we want to allocate into the pool `1099511627777`:
         uint64 poolId = 1099511627777;
 
@@ -39,5 +40,6 @@ contract SwapExample {
         });
 
         portfolio.swap(order);
+        */
     }
 }

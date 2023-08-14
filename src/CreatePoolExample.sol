@@ -2,6 +2,7 @@
 pragma solidity ^0.8.13;
 
 import "portfolio/interfaces/IPortfolio.sol";
+import "portfolio/strategies/INormalStrategy.sol";
 
 contract CreatePoolExample {
     IPortfolio public portfolio;
@@ -21,9 +22,24 @@ contract CreatePoolExample {
         // a new pair before trying to create the pool.
         uint24 pairId = portfolio.getPairId(asset, quote);
 
+        (
+            bytes memory strategyArgs,
+            uint256 reserveXPerWad,
+            uint256 reserveYPerWad
+        ) = INormalStrategy(portfolio.DEFAULT_STRATEGY()).getStrategyData(
+            1 ether, 1000 wei, 10 days, false, 1 ether
+        );
+
         // Lastly, we can call the `createPool` function with our parameters:
         portfolio.createPool(
-            pairId, address(this), 10, 100, 10_000, 365, 1 ether, 1 ether
+            pairId,
+            reserveXPerWad,
+            reserveYPerWad,
+            100,
+            0,
+            address(0),
+            address(0),
+            strategyArgs
         );
     }
 }
