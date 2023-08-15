@@ -9,7 +9,7 @@ import "solmate/tokens/WETH.sol";
 import "solmate/tokens/ERC20.sol";
 import "solmate/test/utils/mocks/MockERC20.sol";
 
-contract Setup is Test {
+contract Setup is Test, ERC1155TokenReceiver {
     WETH public weth;
     Portfolio public portfolio;
     SimpleRegistry public registry;
