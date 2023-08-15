@@ -16,9 +16,8 @@ contract SwapExample {
     }
 
     function swap() external {
-        /*
         // Assuming we want to allocate into the pool `1099511627777`:
-        uint64 poolId = 1099511627777;
+        uint64 poolId = 4294967297;
 
         // Let's fetch our asset balance and use it for the swap.
         uint256 input = IERC20(asset).balanceOf(address(this));
@@ -28,7 +27,7 @@ contract SwapExample {
 
         // Now we check how much quote tokens we can get for our input.
         uint256 output =
-            portfolio.getAmountOut(poolId, true, input, 0, address(this));
+            portfolio.getAmountOut(poolId, true, input, address(this));
 
         // Then we prepare our swap order and execute it.
         Order memory order = Order({
@@ -40,6 +39,5 @@ contract SwapExample {
         });
 
         portfolio.swap(order);
-        */
     }
 }
