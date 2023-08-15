@@ -26,13 +26,27 @@ contract SwapExampleTest is Setup {
     }
 
     function test_swap() external {
-        /*
         uint24 pairId = portfolio.createPair(address(asset), address(quote));
-        portfolio.createPool(
-            pairId, address(0), 0, 100, 10_000, 365, 1 ether, 1 ether
+        (
+            bytes memory strategyArgs,
+            uint256 reserveXPerWad,
+            uint256 reserveYPerWad
+        ) = INormalStrategy(portfolio.DEFAULT_STRATEGY()).getStrategyData(
+            1 ether, 1000 wei, 10 days, false, 1 ether
         );
 
-        uint64 poolId = 1099511627777;
+        // Lastly, we can call the `createPool` function with our parameters:
+        uint64 poolId = portfolio.createPool(
+            pairId,
+            reserveXPerWad,
+            reserveYPerWad,
+            100,
+            0,
+            address(0),
+            address(0),
+            strategyArgs
+        );
+
         uint256 assetBalance = asset.balanceOf(address(this));
         uint256 quoteBalance = quote.balanceOf(address(this));
 
@@ -45,9 +59,11 @@ contract SwapExampleTest is Setup {
         asset.approve(address(portfolio), deltaAsset);
         quote.approve(address(portfolio), deltaQuote);
 
-        portfolio.allocate(false, poolId, maxLiquidity, deltaAsset, deltaQuote);
+        // Finally, we call the `allocate` function.
+        portfolio.allocate(
+            false, address(this), poolId, maxLiquidity, deltaAsset, deltaQuote
+        );
 
         example.swap();
-        */
     }
 }
