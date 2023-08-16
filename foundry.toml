@@ -3,6 +3,7 @@ libs = ["lib"]
 out = "out"
 remappings = [
   "portfolio/=lib/portfolio/contracts/",
+  "erc20-wrapper/=lib/portfolio-erc20-wrapper/src/",
 ]
 src = "src"
 

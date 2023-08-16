@@ -22,5 +22,11 @@ contract Setup is Test, ERC1155TokenReceiver {
         portfolio = new Portfolio(address(weth), address(registry), address(0));
         asset = new MockERC20("Asset", "ASSET", 18);
         quote = new MockERC20("Quote", "QUOTE", 18);
+
+        vm.label(address(weth), "weth");
+        vm.label(address(portfolio), "portfolio");
+        vm.label(address(registry), "registry");
+        vm.label(address(asset), "asset");
+        vm.label(address(quote), "quote");
     }
 }
