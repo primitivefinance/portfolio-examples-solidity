@@ -7,3 +7,6 @@
 [submodule "lib/portfolio"]
 	path = lib/portfolio
 	url = https://github.com/primitivefinance/portfolio
+[submodule "lib/portfolio-erc20-wrapper"]
+	path = lib/portfolio-erc20-wrapper
+	url = https://github.com/primitivefinance/portfolio-erc20-wrapper
