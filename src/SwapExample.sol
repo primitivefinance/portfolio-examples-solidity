@@ -16,11 +16,11 @@ contract SwapExample {
     }
 
     function swap() external {
-        // Assuming we want to allocate into the pool `1099511627777`:
+        // Assuming we want to allocate into the pool `4294967297`:
         uint64 poolId = 4294967297;
 
-        // Let's fetch our asset balance and use it for the swap.
-        uint256 input = IERC20(asset).balanceOf(address(this));
+        // Let's use a fix input amount:
+        uint256 input = 1 ether;
 
         // We approve the Portfolio contract to move our asset tokens
         IERC20(asset).approve(address(portfolio), input);
