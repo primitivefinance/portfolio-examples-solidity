@@ -22,12 +22,12 @@ contract SwapExample {
         // Let's use a fix input amount:
         uint256 input = 1 ether;
 
-        // We approve the Portfolio contract to move our asset tokens
-        IERC20(asset).approve(address(portfolio), input);
-
         // Now we check how much quote tokens we can get for our input.
         uint256 output =
             portfolio.getAmountOut(poolId, true, input, address(this));
+
+        // We approve the Portfolio contract to move our asset tokens
+        IERC20(asset).approve(address(portfolio), input);
 
         // Then we prepare our swap order and execute it.
         Order memory order = Order({
@@ -37,6 +37,11 @@ contract SwapExample {
             poolId: poolId,
             sellAsset: true
         });
+
+        // We can also simulate the swap before executing it.
+        (bool success,,) =
+            portfolio.simulateSwap(order, block.timestamp, address(this));
+        require(success, "Swap failed");
 
         portfolio.swap(order);
     }
