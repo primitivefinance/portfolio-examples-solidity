@@ -30,7 +30,6 @@ contract AllocateExampleTest is Setup {
             1 ether, 1000 wei, 10 days, false, 1 ether
         );
 
-        // Lastly, we can call the `createPool` function with our parameters:
         uint64 poolId = portfolio.createPool(
             pairId,
             reserveXPerWad,
@@ -42,7 +41,6 @@ contract AllocateExampleTest is Setup {
             strategyArgs
         );
 
-        console.log("Pool id", poolId);
         example.allocate();
     }
 }

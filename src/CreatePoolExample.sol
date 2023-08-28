@@ -22,6 +22,9 @@ contract CreatePoolExample {
         // a new pair before trying to create the pool.
         uint24 pairId = portfolio.getPairId(asset, quote);
 
+        // Then we need to get the correct pool configuration, we can call the
+        // `getStrategyData` function from the strategy contract for this.
+        // In this example, we'll use the default strategy.
         (
             bytes memory strategyArgs,
             uint256 reserveXPerWad,

@@ -30,7 +30,6 @@ contract DeallocateExampleTest is Setup {
             1 ether, 1000 wei, 10 days, false, 1 ether
         );
 
-        // Lastly, we can call the `createPool` function with our parameters:
         portfolio.createPool(
             pairId,
             reserveXPerWad,

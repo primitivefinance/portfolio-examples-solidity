@@ -35,7 +35,6 @@ contract SwapExampleTest is Setup {
             1 ether, 1000 wei, 10 days, false, 1 ether
         );
 
-        // Lastly, we can call the `createPool` function with our parameters:
         uint64 poolId = portfolio.createPool(
             pairId,
             reserveXPerWad,
@@ -59,7 +58,6 @@ contract SwapExampleTest is Setup {
         asset.approve(address(portfolio), deltaAsset);
         quote.approve(address(portfolio), deltaQuote);
 
-        // Finally, we call the `allocate` function.
         portfolio.allocate(
             false, address(this), poolId, maxLiquidity, deltaAsset, deltaQuote
         );
