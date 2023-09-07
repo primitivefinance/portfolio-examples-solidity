@@ -3,6 +3,7 @@ pragma solidity ^0.8.13;
 
 import "portfolio/interfaces/IPortfolio.sol";
 import "portfolio/strategies/INormalStrategy.sol";
+import "portfolio/libraries/AssemblyLib.sol";
 
 contract CreatePoolExample {
     IPortfolio public portfolio;
@@ -30,7 +31,11 @@ contract CreatePoolExample {
             uint256 reserveXPerWad,
             uint256 reserveYPerWad
         ) = INormalStrategy(portfolio.DEFAULT_STRATEGY()).getStrategyData(
-            1 ether, 1000 wei, 10 days, false, 1 ether
+            AssemblyLib.scaleToWad(1600 * 10 ** 6, 6),
+            1_000,
+            10 days,
+            false,
+            AssemblyLib.scaleToWad(1600 * 10 ** 6, 6)
         );
 
         // Lastly, we can call the `createPool` function with our parameters:

@@ -21,6 +21,6 @@ contract Setup is Test, ERC1155TokenReceiver {
         registry = new SimpleRegistry();
         portfolio = new Portfolio(address(weth), address(registry), address(0));
         asset = new MockERC20("Asset", "ASSET", 18);
-        quote = new MockERC20("Quote", "QUOTE", 18);
+        quote = new MockERC20("Quote", "QUOTE", 6);
     }
 }
